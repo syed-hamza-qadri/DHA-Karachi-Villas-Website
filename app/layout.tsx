@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "@/components/ui/sonner"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -41,13 +41,13 @@ export const metadata: Metadata = {
       "DHA Karachi Villas offers Houses for sale in DHA Karachi, premium properties plots & luxury apartments. Secure your future with trusted DHA Karachi real estate investment.",
     images: ["https://dhakv.com/og-image.jpg"],
   },
+  icons: {
+    icon: "https://dhakv.com/favicon.ico",
+    shortcut: "https://dhakv.com/favicon.ico",
+    apple: "https://dhakv.com/apple-touch-icon.png",
+  },
   verification: {
     google: "your-google-verification-code",
-  },
-  icons: {
-    icon: "https://cdn-icons-png.flaticon.com/512/1946/1946488.png",
-    shortcut: "https://cdn-icons-png.flaticon.com/512/1946/1946488.png",
-    apple: "https://cdn-icons-png.flaticon.com/512/1946/1946488.png",
   },
     generator: 'v0.app'
 }
