@@ -10,11 +10,57 @@ import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "DHA Karachi Villas | Houses and Bungalows for Sale | DHA Karachi Real Estate",
+  title: "DHA Karachi real estate | House for sale in DHA Karachi | DHA Plot for sale",
   description:
-    "Discover premium properties across Pakistan and find your perfect home with DHA Karachi Villas comprehensive platform.",
+    "DHA Karachi Villas offers Houses for sale in DHA Karachi, premium properties plots & luxury apartments. Secure your future with trusted DHA Karachi real estate investment.",
+  keywords: [
+    "DHA Karachi real estate",
+    "House for sale in DHA Karachi",
+    "DHA Plot for sale",
+    "DHA Karachi Villas",
+    "premium properties DHA",
+    "luxury apartments DHA",
+    "DHA Karachi investment",
+    "houses for sale DHA",
+    "plots for sale DHA Karachi",
+    "real estate DHA Karachi",
+  ],
+  authors: [{ name: "DHA Karachi Villas" }],
+  openGraph: {
+    title: "DHA Karachi real estate | House for sale in DHA Karachi | DHA Plot for sale",
+    description:
+      "DHA Karachi Villas offers Houses for sale in DHA Karachi, premium properties plots & luxury apartments. Secure your future with trusted DHA Karachi real estate investment.",
+    url: "https://dhakv.com",
+    siteName: "DHA Karachi Villas",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DHA Karachi real estate | House for sale in DHA Karachi | DHA Plot for sale",
+    description:
+      "DHA Karachi Villas offers Houses for sale in DHA Karachi, premium properties plots & luxury apartments. Secure your future with trusted DHA Karachi real estate investment.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: "your-google-verification-code", // Replace with actual verification code
+  },
   icons: {
     icon: "https://gvitckactendhzpjezgu.supabase.co/storage/v1/object/public/property-images/property-images/1752626165307-r8x5nwjk5l.jpg",
+    shortcut:
+      "https://gvitckactendhzpjezgu.supabase.co/storage/v1/object/public/property-images/property-images/1752626165307-r8x5nwjk5l.jpg",
+    apple:
+      "https://gvitckactendhzpjezgu.supabase.co/storage/v1/object/public/property-images/property-images/1752626165307-r8x5nwjk5l.jpg",
   },
     generator: 'v0.app'
 }
