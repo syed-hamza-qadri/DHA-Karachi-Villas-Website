@@ -7,11 +7,10 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'res.cloudinary.com',
+        hostname: 'placeholder.svg',
       },
       {
         protocol: 'https',
@@ -19,17 +18,14 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'plus.unsplash.com',
+        hostname: '*.supabase.co',
       },
       {
         protocol: 'https',
-        hostname: 'source.unsplash.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'gvitckactendhzpjezgu.supabase.co',
-      },
+        hostname: 'supabase.com',
+      }
     ],
+    unoptimized: true,
   },
 }
 
