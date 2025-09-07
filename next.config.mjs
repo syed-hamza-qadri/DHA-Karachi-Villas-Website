@@ -8,12 +8,27 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
-    domains: [
-      'res.cloudinary.com',
-      'images.unsplash.com',
-      'plus.unsplash.com',
-      'source.unsplash.com',
-      'qs7f199-7110.supabase.co', // Updated with your Supabase project ID
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'plus.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'source.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'gvitckactendhzpjezgu.supabase.co',
+      },
     ],
   },
 }
