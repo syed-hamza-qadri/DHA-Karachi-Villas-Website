@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Building2, MessageCircle, Menu, Sparkles, X } from "lucide-react"
+import { Building2, Menu, Sparkles, X } from "lucide-react"
 import { useEffect, useState } from "react"
 
 const navigation = [
@@ -33,8 +33,7 @@ export function Header() {
       </div>
     </header>
     <button className="catalog-ai-assistant" type="button" aria-label="AI Assistant coming soon" data-label="AI Assistant · Coming soon">
-      <MessageCircle className="catalog-ai-assistant-chat" size={23} strokeWidth={1.9} aria-hidden="true" />
-      <Sparkles className="catalog-ai-assistant-sparkle" size={13} strokeWidth={2.25} aria-hidden="true" />
+      <span className="catalog-ai-orb" aria-hidden="true"><Sparkles size={20} strokeWidth={2.2} /></span>
     </button>
   </>
 }

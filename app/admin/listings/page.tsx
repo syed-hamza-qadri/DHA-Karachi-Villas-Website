@@ -593,8 +593,8 @@ export default function AdminListingsPage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
-        <Card className="w-full max-w-md border-0 bg-white rounded-2xl shadow-xl">
+      <div className="dha-admin-auth min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
+        <Card className="dha-admin-auth-card w-full max-w-md border-0 bg-white rounded-2xl shadow-xl">
           <CardContent className="p-8">
             <div className="text-center mb-8">
               <div className="w-16 h-16 bg-gradient-to-br from-primary to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
@@ -636,7 +636,7 @@ export default function AdminListingsPage() {
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4 py-8">
+      <div className="dha-admin-shell container mx-auto px-4 py-8">
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
@@ -648,7 +648,7 @@ export default function AdminListingsPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="dha-admin-shell container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
         <div>
           <h1 className="text-3xl font-bold text-slate-900">Property Listings</h1>
@@ -664,7 +664,7 @@ export default function AdminListingsPage() {
       </div>
 
       <Card
-        className="mb-8 border-0 bg-white rounded-2xl"
+        className="dha-admin-filter-panel mb-8 border-0 bg-white rounded-2xl"
         style={{
           boxShadow: "0 8px 30px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08)",
         }}
@@ -768,7 +768,7 @@ export default function AdminListingsPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {properties.map((property) => (
-            <Card key={property.id} className="border-0 bg-white rounded-2xl shadow-lg overflow-hidden">
+            <Card key={property.id} className="dha-admin-listing-card border-0 bg-white rounded-2xl shadow-lg overflow-hidden">
               <div className="relative h-48">
                 <img
                   src={property.image || "/placeholder.svg?height=200&width=300"}
