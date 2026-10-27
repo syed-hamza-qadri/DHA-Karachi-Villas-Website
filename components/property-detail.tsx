@@ -3,32 +3,7 @@
 import Link from "next/link"
 import { useEffect, useMemo, useState } from "react"
 import { ArrowLeft, ArrowUpRight, Bath, BedDouble, Building2, CheckCircle2, ChevronLeft, ChevronRight, MapPin, Maximize2, MessageCircle, Phone, ShieldCheck } from "lucide-react"
-import { formatPrice, supabase, type Property } from "@/lib/supabase"
-
-function shapeProperty(item: Record<string, unknown>): Property {
-  return {
-    id: Number(item.id),
-    title: String(item.title ?? "Untitled property"),
-    price: Number(item.price ?? 0),
-    location: String(item.location ?? "DHA Karachi"),
-    image: String(item.image ?? "/placeholder.svg"),
-    images: Array.isArray(item.images) ? item.images.filter((image): image is string => typeof image === "string" && image.length > 0) : [String(item.image ?? "/placeholder.svg")],
-    type: String(item.type ?? "Property"),
-    status: item.status === "For Rent" ? "For Rent" : "For Sale",
-    category: item.category === "commercial" ? "commercial" : "residential",
-    description: String(item.description ?? "Property details will be confirmed by the DHA Karachi Villas team."),
-    bedrooms: typeof item.bedrooms === "number" ? item.bedrooms : undefined,
-    bathrooms: typeof item.bathrooms === "number" ? item.bathrooms : undefined,
-    area: typeof item.area === "string" ? item.area : undefined,
-    buildingSize: typeof item.building_size === "string" ? item.building_size : undefined,
-    totalFloors: typeof item.total_floors === "number" ? item.total_floors : undefined,
-    parkingSpaces: typeof item.parking_spaces === "number" ? item.parking_spaces : undefined,
-    zoning: typeof item.zoning === "string" ? item.zoning : undefined,
-    leaseTerm: typeof item.lease_term === "string" ? item.lease_term : undefined,
-    features: Array.isArray(item.features) ? item.features.filter((feature): feature is string => typeof feature === "string") : [],
-    created_at: String(item.created_at ?? ""),
-  }
-}
+import { formatPrice, mapPropertyRecord, supabase, type Property } from "@/lib/supabase"
 
 export function PropertyDetail({ propertyId }: { propertyId: string }) {
   const [property, setProperty] = useState<Property | null>(null)
@@ -37,9 +12,9 @@ export function PropertyDetail({ propertyId }: { propertyId: string }) {
 
   useEffect(() => {
     let active = true
-    const id = Number(propertyId)
+    const id = propertyId.trim()
 
-    if (!Number.isFinite(id)) {
+    if (!id) {
       setLoading(false)
       return
     }
@@ -47,7 +22,7 @@ export function PropertyDetail({ propertyId }: { propertyId: string }) {
     void (async () => {
       try {
         const { data, error } = await supabase.from("properties").select("*").eq("id", id).maybeSingle()
-        if (!error && data && active) setProperty(shapeProperty(data as Record<string, unknown>))
+        if (!error && data && active) setProperty(mapPropertyRecord(data as Record<string, unknown>))
       } finally {
         if (active) setLoading(false)
       }
@@ -58,7 +33,7 @@ export function PropertyDetail({ propertyId }: { propertyId: string }) {
 
   const images = useMemo(() => {
     if (!property) return []
-    return Array.from(new Set([...(property.images ?? []), property.image].filter(Boolean)))
+    return Array.from(new Set([...property.images, property.image].filter((image): image is string => typeof image === "string" && image.length > 0)))
   }, [property])
 
   if (loading) return <main className="catalog-page catalog-detail-page"><div className="catalog-loading"><span className="catalog-loading-mark" />Loading property details</div></main>
@@ -95,9 +70,9 @@ export function PropertyDetail({ propertyId }: { propertyId: string }) {
             <div><small>Property type</small><strong><Building2 size={16} />{property.type}</strong></div>
             <div><small>Location</small><strong><MapPin size={16} />{property.location}</strong></div>
             <div><small>Purpose</small><strong><CheckCircle2 size={16} />{property.status}</strong></div>
-            {property.bedrooms ? <div><small>Bedrooms</small><strong><BedDouble size={16} />{property.bedrooms} bed</strong></div> : null}
-            {property.bathrooms ? <div><small>Bathrooms</small><strong><Bath size={16} />{property.bathrooms} bath</strong></div> : null}
-            {area ? <div><small>Area</small><strong><Maximize2 size={16} />{area}</strong></div> : null}
+            {property.category === "residential" && property.bedrooms ? <div><small>Bedrooms</small><strong><BedDouble size={16} />{property.bedrooms} bed</strong></div> : null}
+            {property.category === "residential" && property.bathrooms ? <div><small>Bathrooms</small><strong><Bath size={16} />{property.bathrooms} bath</strong></div> : null}
+            {area ? <div><small>{property.category === "commercial" ? "Building size" : "Area"}</small><strong><Maximize2 size={16} />{area}</strong></div> : null}
           </div>
 
           <section className="catalog-detail-copy">

@@ -25,7 +25,7 @@ import {
   ShieldCheck,
   Users,
 } from "lucide-react"
-import { formatPrice, supabase, type Property } from "@/lib/supabase"
+import { formatPrice, mapPropertyRecord, supabase, type Property } from "@/lib/supabase"
 
 const localities = [
   { name: "DHA", text: "Explore the area", image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=85" },
@@ -60,36 +60,11 @@ const pathways = {
 
 type Pathway = keyof typeof pathways
 
-function toProperty(row: Record<string, unknown>): Property {
-  return {
-    id: Number(row.id),
-    title: String(row.title ?? "Untitled property"),
-    price: Number(row.price ?? 0),
-    location: String(row.location ?? "DHA Karachi"),
-    image: String(row.image ?? "/placeholder.svg"),
-    images: Array.isArray(row.images) ? (row.images as string[]) : [String(row.image ?? "/placeholder.svg")],
-    type: String(row.type ?? "Property"),
-    status: row.status === "For Rent" ? "For Rent" : "For Sale",
-    category: row.category === "commercial" ? "commercial" : "residential",
-    description: String(row.description ?? ""),
-    bedrooms: typeof row.bedrooms === "number" ? row.bedrooms : undefined,
-    bathrooms: typeof row.bathrooms === "number" ? row.bathrooms : undefined,
-    area: typeof row.area === "string" ? row.area : undefined,
-    buildingSize: typeof row.building_size === "string" ? row.building_size : undefined,
-    totalFloors: typeof row.total_floors === "number" ? row.total_floors : undefined,
-    parkingSpaces: typeof row.parking_spaces === "number" ? row.parking_spaces : undefined,
-    zoning: typeof row.zoning === "string" ? row.zoning : undefined,
-    leaseTerm: typeof row.lease_term === "string" ? row.lease_term : undefined,
-    features: Array.isArray(row.features) ? (row.features as string[]) : [],
-    created_at: String(row.created_at ?? ""),
-  }
-}
-
 function ListingCard({ property, index }: { property: Property; index: number }) {
   const image = property.images?.[0] || property.image || "/placeholder.svg"
 
   return (
-    <Link href={`/properties/${property.id}`} className="catalog-property-card" style={{ animationDelay: `${index * 90}ms` }}>
+    <Link href={`/properties/${encodeURIComponent(property.id)}`} className="catalog-property-card" style={{ animationDelay: `${index * 90}ms` }}>
       <div className="catalog-property-image">
         <img src={image} alt={property.title} />
         <span className="catalog-badge">{property.status}</span>
@@ -139,7 +114,7 @@ export function HomeRedesign() {
       try {
         const { data, error } = await supabase.from("properties").select("*").order("created_at", { ascending: false }).limit(3)
         if (error) throw error
-        if (active) setProperties((data ?? []).map((row) => toProperty(row as Record<string, unknown>)))
+        if (active) setProperties((data ?? []).map((row) => mapPropertyRecord(row as Record<string, unknown>)))
       } catch {
         if (active) setProperties([])
       } finally {

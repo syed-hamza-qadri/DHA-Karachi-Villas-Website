@@ -3,32 +3,7 @@
 import Link from "next/link"
 import { useEffect, useMemo, useState } from "react"
 import { Bath, BedDouble, MapPin, Maximize2, Search } from "lucide-react"
-import { formatPrice, supabase, type Property } from "@/lib/supabase"
-
-function shapeProperty(item: Record<string, unknown>): Property {
-  return {
-    id: Number(item.id),
-    title: String(item.title ?? "Untitled property"),
-    price: Number(item.price ?? 0),
-    location: String(item.location ?? "DHA Karachi"),
-    image: String(item.image ?? "/placeholder.svg"),
-    images: Array.isArray(item.images) ? item.images.filter((image): image is string => typeof image === "string") : [],
-    type: String(item.type ?? "Property"),
-    status: item.status === "For Rent" ? "For Rent" : "For Sale",
-    category: item.category === "commercial" ? "commercial" : "residential",
-    description: String(item.description ?? ""),
-    bedrooms: typeof item.bedrooms === "number" ? item.bedrooms : undefined,
-    bathrooms: typeof item.bathrooms === "number" ? item.bathrooms : undefined,
-    area: typeof item.area === "string" ? item.area : undefined,
-    buildingSize: typeof item.building_size === "string" ? item.building_size : undefined,
-    totalFloors: typeof item.total_floors === "number" ? item.total_floors : undefined,
-    parkingSpaces: typeof item.parking_spaces === "number" ? item.parking_spaces : undefined,
-    zoning: typeof item.zoning === "string" ? item.zoning : undefined,
-    leaseTerm: typeof item.lease_term === "string" ? item.lease_term : undefined,
-    features: Array.isArray(item.features) ? item.features.filter((feature): feature is string => typeof feature === "string") : [],
-    created_at: String(item.created_at ?? ""),
-  }
-}
+import { formatPrice, mapPropertyRecord, supabase, type Property } from "@/lib/supabase"
 
 export function PropertyDirectory() {
   const [items, setItems] = useState<Property[]>([])
@@ -42,7 +17,7 @@ export function PropertyDirectory() {
     void (async () => {
       try {
         const { data } = await supabase.from("properties").select("*").order("created_at", { ascending: false })
-        if (active && data) setItems(data.map((item) => shapeProperty(item as Record<string, unknown>)))
+        if (active && data) setItems(data.map((item) => mapPropertyRecord(item as Record<string, unknown>)))
       } finally {
         if (active) setLoading(false)
       }
@@ -93,7 +68,7 @@ export function PropertyDirectory() {
           ) : filtered.length ? (
             <div className="catalog-property-grid">
               {filtered.map((property, index) => (
-                <Link href={`/properties/${property.id}`} className="catalog-property-card" key={property.id} style={{ animationDelay: `${index * 75}ms` }}>
+                <Link href={`/properties/${encodeURIComponent(property.id)}`} className="catalog-property-card" key={property.id} style={{ animationDelay: `${index * 75}ms` }}>
                   <div className="catalog-property-image">
                     <img src={property.images?.[0] || property.image || "/placeholder.svg"} alt={property.title} />
                     <span className="catalog-badge">{property.status}</span>

@@ -13,7 +13,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import { MapPin, Bed, Bath, Square, Eye, Star, Search, Filter, Tag, ChevronLeft, ChevronRight, X } from "lucide-react"
 import { formatPrice } from "@/lib/utils"
-import { supabase, type Property } from "@/lib/supabase"
+import { mapPropertyRecord, supabase, type Property } from "@/lib/supabase"
 
 export function FeaturedProperties() {
   const router = useRouter()
@@ -34,7 +34,7 @@ export function FeaturedProperties() {
     bedrooms: "any",
   })
 
-  const [openDialogs, setOpenDialogs] = useState<{ [key: number]: boolean }>({})
+  const [openDialogs, setOpenDialogs] = useState<{ [key: string]: boolean }>({})
 
   // Fetch properties from Supabase
   useEffect(() => {
@@ -54,28 +54,7 @@ export function FeaturedProperties() {
         return
       }
 
-      const formattedProperties: Property[] = data.map((property) => ({
-        id: property.id,
-        title: property.title,
-        price: property.price,
-        location: property.location,
-        image: property.image,
-        images: property.images || [property.image],
-        type: property.type,
-        status: property.status as "For Sale" | "For Rent",
-        category: property.category as "residential" | "commercial",
-        description: property.description,
-        bedrooms: property.bedrooms,
-        bathrooms: property.bathrooms,
-        area: property.area,
-        buildingSize: property.building_size,
-        totalFloors: property.total_floors,
-        parkingSpaces: property.parking_spaces,
-        zoning: property.zoning,
-        leaseTerm: property.lease_term,
-        features: property.features || [],
-        created_at: property.created_at,
-      }))
+      const formattedProperties: Property[] = data.map((property) => mapPropertyRecord(property as Record<string, unknown>))
 
       setAllProperties(formattedProperties)
       setProperties(formattedProperties)
@@ -192,7 +171,7 @@ export function FeaturedProperties() {
     window.open(whatsappUrl, "_blank")
   }
 
-  const handleScheduleTour = (propertyId: number) => {
+  const handleScheduleTour = (propertyId: string) => {
     setOpenDialogs((prev) => ({ ...prev, [propertyId]: false }))
 
     setTimeout(() => {
