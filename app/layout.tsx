@@ -7,7 +7,7 @@ import { Footer } from "@/components/footer"
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from "@/components/theme-provider"
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" })
 
 export const metadata: Metadata = {
   title: "DHA Karachi real estate | House for sale in DHA Karachi | DHA Plot for sale",
@@ -72,7 +72,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={inter.variable}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <Header />
           <main>{children}</main>
