@@ -115,6 +115,9 @@ body { background: var(--catalog-surface); color: var(--catalog-ink); font-famil
 .catalog-header-inner { display: flex; min-height: 4.85rem; align-items: center; justify-content: space-between; gap: 1.5rem; }
 .catalog-brand { display: inline-flex; align-items: center; gap: .6rem; color: var(--catalog-ink); font-size: .9rem; font-weight: 800; letter-spacing: .08em; white-space: nowrap; }
 .catalog-brand span { display: grid; width: 2.15rem; height: 2.15rem; place-items: center; border-radius: .7rem; color: #fff; background: var(--catalog-ink); }
+.catalog-brand-logo-link { width: auto; height: 3.25rem; gap: .12rem; }
+.catalog-brand-logo { display: block; width: 4.95rem; height: 100%; flex: none; object-fit: contain; }
+.catalog-brand .catalog-brand-wordmark { display: block; width: auto; height: auto; color: var(--catalog-ink); background: transparent; font-family: "Palatino Linotype", Palatino, Georgia, serif; font-size: 1.58rem; font-style: italic; font-weight: 500; letter-spacing: -.04em; line-height: .92; -webkit-text-stroke: .12px currentColor; white-space: nowrap; }
 .catalog-nav { display: flex; align-items: center; gap: 1.4rem; font-size: .84rem; font-weight: 600; }
 .catalog-nav > a:not(.catalog-nav-cta) { position: relative; color: var(--catalog-ink-soft); }
 .catalog-nav > a:not(.catalog-nav-cta)::after { position: absolute; right: 0; bottom: -.43rem; left: 0; height: 1px; background: var(--catalog-accent); content: ""; transform: scaleX(0); transform-origin: right; transition: transform .22s ease; }
@@ -481,6 +484,9 @@ body { background: var(--catalog-surface); color: var(--catalog-ink); font-famil
   .catalog-shell { width: min(100% - 28px, 600px); }
   .catalog-header-inner { position: relative; min-height: 4rem; gap: .7rem; }
   .catalog-brand { gap: .45rem; font-size: .82rem; font-weight: 750; }
+  .catalog-brand-logo-link { width: auto; height: 2.85rem; gap: .08rem; }
+  .catalog-brand-logo { width: 4.35rem; }
+  .catalog-brand .catalog-brand-wordmark { font-size: 1.25rem; font-weight: 500; -webkit-text-stroke: .1px currentColor; }
   .catalog-brand span { width: 1.69rem; height: 1.69rem; border-radius: .5rem; }
   .catalog-menu { display: grid; width: 2.625rem; height: 2.625rem; flex: none; place-items: center; border-radius: .75rem; padding: 0; background: var(--catalog-surface); box-shadow: .25rem .25rem .5rem #c7cfd9, -.25rem -.25rem .5rem #fff; }
   .catalog-ai-assistant { width: 3.3rem; height: 3.3rem; }

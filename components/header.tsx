@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Building2, Menu, MessageCircle, X } from "lucide-react"
+import { Menu, MessageCircle, X } from "lucide-react"
 import { useEffect, useState } from "react"
 
 const navigation = [
@@ -24,7 +24,7 @@ export function Header() {
   return <>
     <header className={`catalog-header${scrolled ? " is-scrolled" : ""}`}>
       <div className="catalog-shell catalog-header-inner">
-        <Link className="catalog-brand" href="/" onClick={() => setOpen(false)}><span><Building2 size={17} /></span>DHA KARACHI VILLAS</Link>
+        <Link className="catalog-brand catalog-brand-logo-link" href="/" onClick={() => setOpen(false)}><img src="/brand/dv-monogram-original.png" alt="DHA Karachi Villas" className="catalog-brand-logo" /></Link>
         <button className="catalog-menu" type="button" onClick={() => setOpen((value) => !value)} aria-label={open ? "Close navigation menu" : "Open navigation menu"} aria-expanded={open}>{open ? <X size={21} /> : <Menu size={22} />}</button>
         <nav className={`catalog-nav${open ? " is-open" : ""}`} aria-label="Primary navigation">
           {navigation.map((item) => <Link key={item.href} href={item.href} onClick={() => setOpen(false)}>{item.label}</Link>)}
