@@ -1,14 +1,13 @@
 "use client"
 
 import Link from "next/link"
-import { Building2, Menu, X } from "lucide-react"
+import { Bot, Building2, Menu, X } from "lucide-react"
 import { useEffect, useState } from "react"
 
 const navigation = [
+  { href: "/", label: "Home" },
   { href: "/properties", label: "Properties" },
-  { href: "/properties?area=DHA%20Phase%206", label: "Areas" },
-  { href: "/contact", label: "List a property" },
-  { href: "/about", label: "How it works" },
+  { href: "/about", label: "About" },
 ]
 
 export function Header() {
@@ -22,7 +21,7 @@ export function Header() {
     return () => window.removeEventListener("scroll", update)
   }, [])
 
-  return (
+  return <>
     <header className={`catalog-header${scrolled ? " is-scrolled" : ""}`}>
       <div className="catalog-shell catalog-header-inner">
         <Link className="catalog-brand" href="/" onClick={() => setOpen(false)}><span><Building2 size={17} /></span>DHA KARACHI VILLAS</Link>
@@ -33,5 +32,8 @@ export function Header() {
         </nav>
       </div>
     </header>
-  )
+    <button className="catalog-ai-assistant" type="button" aria-label="AI Assistant coming soon" data-label="AI Assistant · Coming soon">
+      <Bot size={22} aria-hidden="true" />
+    </button>
+  </>
 }

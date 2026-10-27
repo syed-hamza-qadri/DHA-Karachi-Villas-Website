@@ -10,9 +10,13 @@ import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans", display: "swap" })
 
 export const metadata: Metadata = {
-  title: "DHA Karachi real estate | House for sale in DHA Karachi | DHA Plot for sale",
+  metadataBase: new URL("https://dhakv.com"),
+  title: {
+    default: "DHA Karachi Properties | DHA Karachi Villas",
+    template: "%s | DHA Karachi Villas",
+  },
   description:
-    "DHA Karachi Villas offers Houses for sale in DHA Karachi, premium properties plots & luxury apartments. Secure your future with trusted DHA Karachi real estate investment.",
+    "DHA Karachi Villas helps buyers, sellers and tenants explore DHA Karachi villas, homes, plots and rental properties with local market guidance.",
   keywords: [
     "DHA Karachi real estate",
     "House for sale in DHA Karachi",
@@ -27,19 +31,19 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "DHA Karachi Villas" }],
   openGraph: {
-    title: "DHA Karachi real estate | House for sale in DHA Karachi | DHA Plot for sale",
+    title: "DHA Karachi Properties | DHA Karachi Villas",
     description:
-      "DHA Karachi Villas offers Houses for sale in DHA Karachi, premium properties plots & luxury apartments. Secure your future with trusted DHA Karachi real estate investment.",
-    url: "https://dhakv.com",
+      "Explore DHA Karachi villas, homes, plots and rental properties with local market guidance.",
+    url: "/",
     siteName: "DHA Karachi Villas",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "DHA Karachi real estate | House for sale in DHA Karachi | DHA Plot for sale",
+    title: "DHA Karachi Properties | DHA Karachi Villas",
     description:
-      "DHA Karachi Villas offers Houses for sale in DHA Karachi, premium properties plots & luxury apartments. Secure your future with trusted DHA Karachi real estate investment.",
+      "Explore DHA Karachi villas, homes, plots and rental properties with local market guidance.",
   },
   robots: {
     index: true,
@@ -52,9 +56,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "your-google-verification-code", // Replace with actual verification code
-  },
   icons: {
     icon: "https://gvitckactendhzpjezgu.supabase.co/storage/v1/object/public/property-images/property-images/1752626165307-r8x5nwjk5l.jpg",
     shortcut:
@@ -62,7 +63,6 @@ export const metadata: Metadata = {
     apple:
       "https://gvitckactendhzpjezgu.supabase.co/storage/v1/object/public/property-images/property-images/1752626165307-r8x5nwjk5l.jpg",
   },
-    generator: 'v0.app'
 }
 
 export default function RootLayout({

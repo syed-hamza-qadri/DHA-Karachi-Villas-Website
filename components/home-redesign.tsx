@@ -13,13 +13,17 @@ import {
   CalendarCheck2,
   CircleCheck,
   Clock3,
+  DollarSign,
   FileSearch,
+  Headphones,
+  Home,
   KeyRound,
   MapPin,
   Maximize2,
   Search,
   SearchCheck,
   ShieldCheck,
+  Users,
 } from "lucide-react"
 import { formatPrice, supabase, type Property } from "@/lib/supabase"
 
@@ -85,7 +89,7 @@ function ListingCard({ property, index }: { property: Property; index: number })
   const image = property.images?.[0] || property.image || "/placeholder.svg"
 
   return (
-    <Link href={`/properties?search=${encodeURIComponent(property.title)}`} className="catalog-property-card" style={{ animationDelay: `${index * 90}ms` }}>
+    <Link href={`/properties/${property.id}`} className="catalog-property-card" style={{ animationDelay: `${index * 90}ms` }}>
       <div className="catalog-property-image">
         <img src={image} alt={property.title} />
         <span className="catalog-badge">{property.status}</span>
@@ -166,9 +170,9 @@ export function HomeRedesign() {
         <span className="catalog-orb catalog-orb-two" />
         <div className="catalog-shell catalog-hero-layout">
           <div className="catalog-hero-copy">
-            <p className="catalog-hero-label"><span />KARACHI PROPERTY, CLEARLY LISTED</p>
-            <h1>Find the place that feels <em>right.</em></h1>
-            <p className="catalog-hero-intro">Search structured sale and rent listings, explore DHA and nearby areas, then take the next step with a real person.</p>
+            <p className="catalog-hero-label"><span />DHA KARACHI VILLAS</p>
+            <h1>Buy property in <em>DHA Karachi.</em></h1>
+            <p className="catalog-hero-intro">Explore DHA villas, plots, homes for sale and rental options with a team that knows the local market.</p>
             <form className="catalog-search" onSubmit={submitSearch}>
               <label><span>Search</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Area, property type or keyword" /></label>
               <label><span>I want to</span><select value={purpose} onChange={(event) => setPurpose(event.target.value)}><option value="">Buy or rent</option><option value="for-sale">Buy</option><option value="for-rent">Rent</option></select></label>
@@ -178,10 +182,10 @@ export function HomeRedesign() {
             <div className="catalog-hero-links"><Link href="/properties?status=for-sale">Homes for sale <ArrowUpRight size={15} /></Link><Link href="/properties?status=for-rent">Homes for rent <ArrowUpRight size={15} /></Link></div>
           </div>
           <aside className="catalog-hero-aside">
-            <p>THE DHA KARACHI VILLAS STANDARD</p>
-            <h2>Less guesswork. Better questions.</h2>
-            <ul><li><CircleCheck size={17} />Essentials visible before you enquire</li><li><CircleCheck size={17} />Clear property details and direct contact</li><li><CircleCheck size={17} />Human confirmation before a viewing</li></ul>
-            <Link href="/about">How DHA Karachi Villas works <ArrowRight size={16} /></Link>
+            <p>WHY CHOOSE DHA KARACHI VILLAS</p>
+            <h2>Managing your space.</h2>
+            <ul><li><CircleCheck size={17} />Luxury villas, plots and investment options</li><li><CircleCheck size={17} />Houses for sale and rent in DHA Karachi</li><li><CircleCheck size={17} />Premium real estate solutions in DHA</li></ul>
+            <Link href="/about">Learn more about us <ArrowRight size={16} /></Link>
           </aside>
         </div>
       </section>
@@ -189,7 +193,7 @@ export function HomeRedesign() {
       <section className="catalog-intent"><div className="catalog-shell catalog-intent-grid">
         <Link href="/properties?status=for-sale"><span className="catalog-intent-number">01</span><span className="catalog-intent-copy"><strong>Buy</strong><small>Explore sale listings</small></span><span className="catalog-intent-arrow"><ArrowUpRight size={19} /></span></Link>
         <Link href="/properties?status=for-rent"><span className="catalog-intent-number">02</span><span className="catalog-intent-copy"><strong>Rent</strong><small>Find your next address</small></span><span className="catalog-intent-arrow"><ArrowUpRight size={19} /></span></Link>
-        <Link href="/contact"><span className="catalog-intent-number">03</span><span className="catalog-intent-copy"><strong>List</strong><small>Start with a conversation</small></span><span className="catalog-intent-arrow"><ArrowUpRight size={19} /></span></Link>
+        <Link href="/contact"><span className="catalog-intent-number">03</span><span className="catalog-intent-copy"><strong>Sell</strong><small>Start with a conversation</small></span><span className="catalog-intent-arrow"><ArrowUpRight size={19} /></span></Link>
       </div></section>
 
       <section className="catalog-section"><div className="catalog-shell">
@@ -213,8 +217,8 @@ export function HomeRedesign() {
         <article className="catalog-pathway-card"><SelectedIcon size={25} /><p>DHA Karachi Villas for {selectedPath}</p><h3>{selected.title}</h3><span>{selected.text}</span><Link href={selected.href}> {selected.action} <ArrowUpRight size={17} /></Link></article>
       </div></section>
 
-      <section id="help" className="catalog-section catalog-help-section"><div className="catalog-shell"><div className="catalog-section-heading"><div><p>HOW WE CAN HELP</p><h2>Useful help at the right moment.</h2></div><span>Focused around practical property decisions, clear information and direct support.</span></div><div className="catalog-service-grid">
-        {[{ icon: SearchCheck, title: "Property search", text: "Start with locality, type and purpose, then narrow the shortlist with details that matter." }, { icon: CalendarCheck2, title: "Viewing coordination", text: "Send a clear request first, then let the team confirm current availability before a viewing." }, { icon: FileSearch, title: "Listing support", text: "Owners can share the essentials first and receive guidance for the next practical step." }].map(({ icon: Icon, title, text }, index) => <article key={title}><span>0{index + 1}</span><Icon size={25} /><h3>{title}</h3><p>{text}</p></article>)}
+      <section id="help" className="catalog-section catalog-help-section"><div className="catalog-shell"><div className="catalog-section-heading"><div><p>OUR SERVICES</p><h2>Useful help at the right moment.</h2></div><span>Comprehensive real estate services to help you buy, sell, or rent properties with confidence.</span></div><div className="catalog-service-grid">
+        {[{ icon: SearchCheck, title: "Property Search", text: "Find your perfect home with our advanced search filters and personalized recommendations." }, { icon: DollarSign, title: "Market Analysis", text: "Get accurate property valuations and market insights to make informed decisions." }, { icon: Users, title: "Expert Agents", text: "Work with experienced real estate professionals who know the local market." }, { icon: ShieldCheck, title: "Secure Transactions", text: "Safe and secure property transactions with full legal support and documentation." }, { icon: Home, title: "Property Management", text: "Comprehensive property management services for landlords and investors." }, { icon: Headphones, title: "24/7 Support", text: "Round-the-clock customer support to assist you throughout your property journey." }].map(({ icon: Icon, title, text }, index) => <article key={title}><span>{String(index + 1).padStart(2, "0")}</span><Icon size={25} /><h3>{title}</h3><p>{text}</p></article>)}
       </div></div></section>
 
       <section className="catalog-section catalog-area-section"><div className="catalog-shell"><div className="catalog-section-heading"><div><p>EXPLORE KARACHI</p><h2>Every search starts somewhere.</h2></div><span>Discover an area first, then filter into property details that are useful before you call.</span></div><div className="catalog-area-grid">{localities.map((locality, index) => <Link href={`/properties?area=${encodeURIComponent(locality.name)}`} key={locality.name} style={{ backgroundImage: `url(${locality.image})` }}><span>0{index + 1}</span><strong>{locality.name}<small>{locality.text} <ArrowUpRight size={14} /></small></strong></Link>)}</div></div></section>
@@ -223,7 +227,7 @@ export function HomeRedesign() {
 
       <section className="catalog-section"><div className="catalog-shell catalog-office"><div><p className="catalog-eyebrow">VISIT OR CALL</p><h2>A DHA team, easy to reach.</h2><p>For a direct conversation, visit the office in Bukhari Commercial or contact the team during business hours.</p><Link href="/contact" className="catalog-orange-button">Contact DHA Karachi Villas <ArrowUpRight size={17} /></Link></div><div><p><MapPin size={21} /><span><strong>Office</strong>Bukhari Commercial, DHA Phase 6<br />Karachi, Pakistan</span></p><p><Clock3 size={21} /><span><strong>Hours</strong>Monday to Saturday<br />10:00 AM to 8:00 PM</span></p></div></div></section>
 
-      <section className="catalog-section catalog-cta-section"><div className="catalog-shell catalog-cta"><div><p>HAVE A PROPERTY TO LIST</p><h2>Start with the essentials. We will keep the next step clear.</h2></div><Link href="/contact">List a property <ArrowUpRight size={17} /></Link></div></section>
+      <section className="catalog-section catalog-cta-section"><div className="catalog-shell catalog-cta"><div><p>HAVE A PROPERTY TO LIST</p><h2>List your DHA property with confidence.</h2></div><Link href="/contact">List a property <ArrowUpRight size={17} /></Link></div></section>
     </div>
   )
 }
